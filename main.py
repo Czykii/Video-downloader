@@ -1,4 +1,4 @@
-from pytube import YouTube
+from pytube import YouTube, Playlist
 import tkinter as tk
 import sys
 
@@ -7,7 +7,7 @@ def download_vid(root, link):
     yt = yt.streams.get_highest_resolution()
     if yt is not None:
         try:
-            print(yt.title)
+            print("You are downloading", yt.title)
             yt.download()
         except:
             print("An error has occurred")
@@ -18,7 +18,23 @@ def download_vid(root, link):
         faliure_label = tk.Label(root, text="Download faliure")
         faliure_label.place(relx=0.5, rely=0.7, anchor="center")
         
-            
+def download_play(root, link):
+    play = Playlist(link)
+    if play is not None:
+        print("You are downloading",play.title)
+        for video in play.videos:
+            video = video.streams.get_highest_resolution()
+            try:
+                print(video.title)
+                video.download()
+            except:    
+                print("An error has occurred")
+                sys.exit(1)
+            success_label = tk.Label(root, text="Download successful")
+            success_label.place(relx=0.5, rely=0.7, anchor="center")
+    else:
+        faliure_label = tk.Label(root, text="Download faliure")
+        faliure_label.place(relx=0.5, rely=0.7, anchor="center")
 
 def vid(root):
     vid_frame = tk.Frame(root, width=1200, height=600)
@@ -39,7 +55,7 @@ def playlist(root):
     info.place(relx=0.5, rely=0.1, anchor="center")
     link_label = tk.Label(playlist_frame, text="Input playlist link")
     link_entry = tk.Entry(playlist_frame, width=75)
-    download = tk.Button(playlist_frame, text="DOWNLOAD", width=50, height=5)
+    download = tk.Button(playlist_frame, text="DOWNLOAD", width=50, height=5, command=lambda: download_play(playlist_frame, link_entry.get()))
     link_label.place(relx=0.1, rely=0.2)
     link_entry.place(relx=0.1, rely=0.25)
     download.place(relx=0.3, rely=0.4)
