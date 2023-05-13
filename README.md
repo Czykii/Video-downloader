@@ -33,12 +33,10 @@ def __init__(self, client='WEB', use_oauth=False, allow_cache=True):
 ```
 --->
 
+## **3. Use of the application**
 To run the app, simply run the main.py file after cloning or downloading the repository and installing the libraries (if you don't have them already installed).
-
-----------
 <br>
 
-## **3. Use of the application**
 To use the app you need to choose what do you want do download (single video or a playlist), next place the link to it to the input field. Make sure, that the video(s) that you want to download **isn't private**. The video(s) will be downloaded in the localization of the main.py file.
 
 ----------
